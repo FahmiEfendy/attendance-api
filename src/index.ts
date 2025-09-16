@@ -2,6 +2,7 @@ import dotenv = require("dotenv");
 import express = require("express");
 
 const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/user");
 const attendanceRoutes = require("./routes/attendance");
 
 type Request = express.Request;
@@ -21,6 +22,7 @@ app.get("/", (req: Request, res: Response) => {
 app.use("/uploads", express.static("uploads"));
 
 app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
 app.use("/attendance", attendanceRoutes);
 
 app.listen(PORT, () =>
