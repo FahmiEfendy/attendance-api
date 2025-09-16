@@ -2,6 +2,7 @@ import dotenv = require("dotenv");
 import express = require("express");
 
 const authRoutes = require("./routes/auth");
+const attendanceRoutes = require("./routes/attendance");
 
 type Request = express.Request;
 type Response = express.Response;
@@ -17,7 +18,10 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Hello!");
 });
 
+app.use("/uploads", express.static("uploads"));
+
 app.use("/auth", authRoutes);
+app.use("/attendance", attendanceRoutes);
 
 app.listen(PORT, () =>
   console.log(`Server running at port http://localhost:${PORT}`)

@@ -12,8 +12,8 @@ module.exports = {
 
     await queryInterface.createTable("user", {
       id: {
-        type: Sequelize.STRING(50),
-        autoIncrement: true,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
         allowNull: false,
       },
@@ -68,5 +68,7 @@ module.exports = {
      * Example:
      * await queryInterface.dropTable('user');
      */
+
+    await queryInterface.dropTable("user");
   },
 };

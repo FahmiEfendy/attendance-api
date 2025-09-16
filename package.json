@@ -14,18 +14,22 @@
   "description": "",
   "dependencies": {
     "bcrypt": "^6.0.0",
+    "dayjs": "^1.11.18",
+    "dayjs-plugin-utc": "^0.1.2",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.2",
     "mysql2": "^3.14.5",
     "sequelize": "^6.37.7",
-    "uuid": "^13.0.0"
+    "uuid": "^7.0.3"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
     "@types/dotenv": "^6.1.1",
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.10",
+    "@types/multer": "^2.0.0",
     "@types/node": "^24.5.0",
     "@types/sequelize": "^4.28.20",
     "nodemon": "^3.1.10",

@@ -1,3 +1,5 @@
+"use strict";
+
 const { DataTypes, Model } = require("sequelize");
 
 import type types = require("sequelize");

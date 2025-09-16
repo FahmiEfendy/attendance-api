@@ -1,6 +1,5 @@
 "use strict";
 
-const bcrypt = require("bcrypt");
 const { v4: uuidv4 } = require("uuid");
 
 /** @type {import('sequelize-cli').Migration} */
@@ -16,30 +15,24 @@ module.exports = {
      * }], {});
      */
 
-    await queryInterface.bulkInsert("user", [
+    await queryInterface.bulkInsert("attendance", [
       {
         id: uuidv4(),
-        username: "admin",
-        password: await bcrypt.hash("admin123", 10),
-        role: "admin",
-        full_name: "System Administrator",
-        email: "admin@example.com",
-        phone: "08123456789",
-        department: "IT",
-        position: "Admin",
+        user_id: "johndoe-123",
+        date: "2025-09-14",
+        time_in: "08:30:23",
+        time_out: "16:51:24",
+        photo_url: "uploads/work-from-home.jpg",
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
-        id: "johndoe-123",
-        username: "johndoe",
-        password: await bcrypt.hash("johndoe123", 10),
-        role: "employee",
-        full_name: "John Doe",
-        email: "john@example.com",
-        phone: "08121234567",
-        department: "Finance",
-        position: "Staff",
+        id: uuidv4(),
+        user_id: "johndoe-123",
+        date: "2025-09-15",
+        time_in: "08:25:15",
+        time_out: "17:31:24",
+        photo_url: "uploads/work-from-home-2.jpg",
         created_at: new Date(),
         updated_at: new Date(),
       },
