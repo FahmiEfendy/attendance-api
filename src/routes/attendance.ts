@@ -6,6 +6,8 @@ import utc = require("dayjs/plugin/utc");
 import timezone = require("dayjs/plugin/timezone");
 
 const db = require("../../models");
+const { UserRole } = require("../enum/role");
+const { authorize } = require("../middleware/authMiddleware");
 const {
   saveUploadedFile,
   deleteUploadedFile,
@@ -86,53 +88,71 @@ router.post(
   }
 );
 
-router.get("/", async (req: Request, res: Response) => {
-  try {
-    const attendances = await db.Attendance.findAll();
-    return res.json({ message: "Success get all attendances", attendances });
-  } catch (error) {
-    return res.status(500).json({ message: "Server error" });
-  }
-});
-
-router.get("/me", async (req: Request, res: Response) => {
-  try {
-    const { user_id } = req.body;
-
-    const selectedUser = await db.User.findOne({
-      where: {
-        id: user_id,
-      },
-    });
-    if (!selectedUser) {
-      return res.status(400).json({ message: "User with that id not exists!" });
+router.get(
+  "/",
+  authorize([UserRole.ADMIN, UserRole.HR]),
+  async (req: any, res: Response) => {
+    try {
+      const attendances = await db.Attendance.findAll();
+      return res.json({ message: "Success get all attendances", attendances });
+    } catch (error) {
+      return res.status(500).json({ message: "Server error" });
     }
-
-    const userAttendace = await db.Attendance.findAll({ where: { user_id } });
-    return res.json({ message: "Success get all attendances", userAttendace });
-  } catch (error) {
-    return res.status(500).json({ message: "Server error" });
   }
-});
+);
 
-router.get("/:id", async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
+router.get(
+  "/me",
+  authorize([UserRole.ADMIN, UserRole.HR], true),
+  async (req: any, res: Response) => {
+    try {
+      const { user_id } = req.body;
 
-    const attendaceDetail = await db.Attendance.findOne({ where: id });
-    return res.json({
-      message: "Success get attendance detail",
-      attendaceDetail,
-    });
-  } catch (error) {
-    return res.status(500).json({ message: "Server error" });
+      const selectedUser = await db.User.findOne({
+        where: {
+          id: user_id,
+        },
+      });
+      if (!selectedUser) {
+        return res
+          .status(400)
+          .json({ message: "User with that id not exists!" });
+      }
+
+      const userAttendace = await db.Attendance.findAll({ where: { user_id } });
+      return res.json({
+        message: "Success get all attendances",
+        userAttendace,
+      });
+    } catch (error) {
+      return res.status(500).json({ message: "Server error" });
+    }
   }
-});
+);
+
+router.get(
+  "/:id",
+  authorize([UserRole.ADMIN, UserRole.HR], true),
+  async (req: any, res: Response) => {
+    try {
+      const { id } = req.params;
+
+      const attendaceDetail = await db.Attendance.findOne({ where: id });
+      return res.json({
+        message: "Success get attendance detail",
+        attendaceDetail,
+      });
+    } catch (error) {
+      return res.status(500).json({ message: "Server error" });
+    }
+  }
+);
 
 router.patch(
   "/:id",
   upload.single("photo"),
-  async (req: Request, res: Response) => {
+  authorize([UserRole.ADMIN, UserRole.HR]),
+  async (req: any, res: Response) => {
     try {
       const { id } = req.params;
       const { time_in, time_out, date } = req.body;
@@ -185,27 +205,31 @@ router.patch(
   }
 );
 
-router.delete("/:id", async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
+router.delete(
+  "/:id",
+  authorize([UserRole.ADMIN, UserRole.HR]),
+  async (req: any, res: Response) => {
+    try {
+      const { id } = req.params;
 
-    const t = await db.sequelize.transaction();
+      const t = await db.sequelize.transaction();
 
-    const attendance = await db.Attendance.findOne({ where: { id } });
-    if (!attendance) {
-      return res.status(404).json({ message: "Attendance not found" });
+      const attendance = await db.Attendance.findOne({ where: { id } });
+      if (!attendance) {
+        return res.status(404).json({ message: "Attendance not found" });
+      }
+
+      await db.Attendance.destroy({ where: { id }, transaction: t });
+      deleteUploadedFile(attendance.dataValues.photo_url);
+      await t.commit(); // Commit delete row if image deleted
+
+      return res.json({
+        message: "Attendance deleted successfully",
+      });
+    } catch (error) {
+      return res.status(500).json({ message: "Server error" });
     }
-
-    await db.Attendance.destroy({ where: { id }, transaction: t });
-    deleteUploadedFile(attendance.dataValues.photo_url);
-    await t.commit(); // Commit delete row if image deleted
-
-    return res.json({
-      message: "Attendance deleted successfully",
-    });
-  } catch (error) {
-    return res.status(500).json({ message: "Server error" });
   }
-});
+);
 
 module.exports = router;

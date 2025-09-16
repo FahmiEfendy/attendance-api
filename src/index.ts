@@ -4,6 +4,7 @@ import express = require("express");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const attendanceRoutes = require("./routes/attendance");
+const { authenticate } = require("./middleware/authMiddleware");
 
 type Request = express.Request;
 type Response = express.Response;
@@ -22,8 +23,8 @@ app.get("/", (req: Request, res: Response) => {
 app.use("/uploads", express.static("uploads"));
 
 app.use("/auth", authRoutes);
-app.use("/user", userRoutes);
-app.use("/attendance", attendanceRoutes);
+app.use("/user", authenticate, userRoutes);
+app.use("/attendance", authenticate, attendanceRoutes);
 
 app.listen(PORT, () =>
   console.log(`Server running at port http://localhost:${PORT}`)
