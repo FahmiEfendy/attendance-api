@@ -63,7 +63,7 @@ router.post(
           user_id,
           date: today.format("YYYY-MM-DD"),
           time_in: today.format("HH:mm:ss"),
-          photo_url: photoPath,
+          photo_in_url: photoPath,
         });
 
         return res.json({
@@ -72,7 +72,10 @@ router.post(
         });
       } else if (!attendance.dataValues.time_out) {
         // Check-out
+        const photoPath = saveUploadedFile(req.file);
+
         attendance.set("time_out", today.format("HH:mm:ss"));
+        attendance.set("photo_out_url", photoPath);
         await attendance.save();
 
         return res.json({
@@ -137,10 +140,10 @@ router.get(
     try {
       const { id } = req.params;
 
-      const attendaceDetail = await db.Attendance.findOne({ where: id });
+      const attendanceDetail = await db.Attendance.findOne({ where: id });
       return res.json({
         message: "Success get attendance detail",
-        attendaceDetail,
+        attendanceDetail,
       });
     } catch (error) {
       return res.status(500).json({ message: "Server error" });
@@ -220,7 +223,8 @@ router.delete(
       }
 
       await db.Attendance.destroy({ where: { id }, transaction: t });
-      deleteUploadedFile(attendance.dataValues.photo_url);
+      deleteUploadedFile(attendance.dataValues.photo_in_url);
+      deleteUploadedFile(attendance.dataValues.photo_out_url);
       await t.commit(); // Commit delete row if image deleted
 
       return res.json({

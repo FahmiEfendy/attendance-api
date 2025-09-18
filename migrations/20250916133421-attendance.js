@@ -21,7 +21,10 @@ module.exports = {
       time_out: {
         type: Sequelize.TIME,
       },
-      photo_url: {
+      photo_in_url: {
+        type: Sequelize.STRING,
+      },
+      photo_out_url: {
         type: Sequelize.STRING,
       },
       created_at: {

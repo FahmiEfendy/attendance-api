@@ -10,7 +10,8 @@ interface AttendanceAttributes {
   date: string;
   time_in: string;
   time_out?: string;
-  photo_url?: string;
+  photo_in_url?: string;
+  photo_out_url?: string;
   created_at?: Date;
   updated_at?: Date;
 }
@@ -28,7 +29,8 @@ module.exports = (sequelize: types.Sequelize, dataTypes: typeof DataTypes) => {
     public date!: string;
     public time_in!: string;
     public time_out?: string;
-    public photo_url?: string;
+    public photo_in_url?: string;
+    public photo_out_url?: string;
     public created_at?: Date;
     public updated_at?: Date;
     /**
@@ -54,7 +56,8 @@ module.exports = (sequelize: types.Sequelize, dataTypes: typeof DataTypes) => {
       date: DataTypes.DATE,
       time_in: DataTypes.TIME,
       time_out: DataTypes.TIME,
-      photo_url: DataTypes.STRING(50),
+      photo_in_url: DataTypes.STRING(50),
+      photo_out_url: DataTypes.STRING(50),
     },
     {
       sequelize,
