@@ -1,3 +1,4 @@
+import cors = require("cors");
 import dotenv = require("dotenv");
 import express = require("express");
 
@@ -15,6 +16,9 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
+
+// Allow all cors
+app.use(cors());
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello!");

@@ -82,6 +82,7 @@ router.post("/login", async (req: Request, res: Response) => {
       {
         id: selectedUser.id,
         username: selectedUser.username,
+        full_name: selectedUser.full_name,
         role: selectedUser.role,
       },
       process.env.JWT_SECRET || "secret",
