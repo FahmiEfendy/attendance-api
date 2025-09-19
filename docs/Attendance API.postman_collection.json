@@ -1,0 +1,2752 @@
+{
+	"info": {
+		"_postman_id": "9df87515-d2f3-4be8-8d8a-41a43d8ef53b",
+		"name": "Attendance API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21604357"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "POST Register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"johndoe\",\r\n  \"password\": \"johndoe123@\",\r\n  \"role\": \"employee\",\r\n  \"full_name\": \"John Doe\",\r\n  \"email\": \"johndoe@example.com\",\r\n  \"phone\": \"081231231234\",\r\n  \"department\": \"Engineering\",\r\n  \"position\": \"Software Engineer\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/register",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "400 - Missing Required Field",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"\",\r\n  \"password\": \"johndoe123@\",\r\n  \"role\": \"employee\",\r\n  \"full_name\": \"John Doe\",\r\n  \"email\": \"johndoe@example.com\",\r\n  \"phone\": \"081231231234\",\r\n  \"department\": \"Engineering\",\r\n  \"position\": \"Software Engineer\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/register",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"35-b1YzpV2i7IKUw8SvcV0kIyOPTeA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 05:52:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"\\\"username\\\" is not allowed to be empty\"\n}"
+						},
+						{
+							"name": "200 - Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"johndoe\",\r\n  \"password\": \"johndoe123@\",\r\n  \"role\": \"employee\",\r\n  \"full_name\": \"John Doe\",\r\n  \"email\": \"johndoe@example.com\",\r\n  \"phone\": \"081231231234\",\r\n  \"department\": \"Engineering\",\r\n  \"position\": \"Software Engineer\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/register",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-nMoFx54+czTntmSLXl3mqIsZV4A\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 05:53:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User registered successfully\"\n}"
+						},
+						{
+							"name": "400 - User Exist",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"johndoe\",\r\n  \"password\": \"johndoe123@\",\r\n  \"role\": \"employee\",\r\n  \"full_name\": \"John Doe\",\r\n  \"email\": \"johndoe@example.com\",\r\n  \"phone\": \"081231231234\",\r\n  \"department\": \"Engineering\",\r\n  \"position\": \"Software Engineer\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/register",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "62"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3e-fqKHqE+QX5ivCaeq0dLf3jUd6/c\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 05:53:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User with that username or email already exists!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "POST Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"johndoe\",\r\n    \"password\":\"johndoe123@\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/auth/login",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"johndoe\",\r\n    \"password\":\"johndoe123@\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/login",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "310"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"136-HyZvXapzSHCoSXZdK98dlZfimkU\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 05:55:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Login successful\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRlMzJjNTk2LWEyMmYtNDRjNi1hN2FlLTIwNWU5YTM5ZmVkOCIsInVzZXJuYW1lIjoiam9obmRvZSIsImZ1bGxfbmFtZSI6IkpvaG4gRG9lIiwicm9sZSI6ImVtcGxveWVlIiwiaWF0IjoxNzU4MjYxMzM2LCJleHAiOjE3NTg2OTMzMzZ9.d4cRfrjzV-ozPpqsVxWe5T3FkkJsiYNRdx-vjGNhntI\"\n}"
+						},
+						{
+							"name": "400 - Missing Required Field",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"\",\r\n    \"password\":\"johndoe123@\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/login",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"35-b1YzpV2i7IKUw8SvcV0kIyOPTeA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 05:54:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"\\\"username\\\" is not allowed to be empty\"\n}"
+						},
+						{
+							"name": "404 - User Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"test\",\r\n    \"password\":\"johndoe123@\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/login",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "32"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"20-tYGeIzvL0hy6F0TNEDRky3bEsU4\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 05:55:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User didn't exist!\"\n}"
+						},
+						{
+							"name": "401 - Invalid Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"johndoe\",\r\n    \"password\":\"johndoe123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/auth/login",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "31"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f-zk/l8JeG1xTI5BLjZRGrwugF/UE\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 05:55:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid password!\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Attendance",
+			"item": [
+				{
+					"name": "POST Attendance (Check In and Check Out)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "4e32c596-a22f-44c6-a7ae-205e9a39fed8",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/C:/Users/fahmi/OneDrive/Desktop/360_F_514723373_cIDcULXKOjW0yld18ENeWtFe5maDrQ4k.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/attendance/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"attendance",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - Success Check In",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "4e32c596-a22f-44c6-a7ae-205e9a39fed8",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/fahmi/OneDrive/Desktop/360_F_514723373_cIDcULXKOjW0yld18ENeWtFe5maDrQ4k.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/attendance/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"attendance",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "319"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"13f-7Y/Je5ROgspBV9XJCBJ7JxZFseg\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 07:26:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success checked in\",\n    \"attendance\": {\n        \"id\": \"a35caaa9-4bbd-4673-af73-bf25d7aba4e8\",\n        \"user_id\": \"4e32c596-a22f-44c6-a7ae-205e9a39fed8\",\n        \"date\": \"2025-09-19T00:00:00.000Z\",\n        \"time_in\": \"14:26:34\",\n        \"photo_in_url\": \"uploads\\\\1758266794792.jpg\",\n        \"updated_at\": \"2025-09-19T07:26:34.794Z\",\n        \"created_at\": \"2025-09-19T07:26:34.794Z\"\n    }\n}"
+						},
+						{
+							"name": "200 - Success Check Out",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "4e32c596-a22f-44c6-a7ae-205e9a39fed8",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/fahmi/OneDrive/Desktop/360_F_514723373_cIDcULXKOjW0yld18ENeWtFe5maDrQ4k.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/attendance/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"attendance",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "387"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"183-rU2NHQfFp2/tFIG+l/e0Jk9xYAg\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 07:26:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success checked out\",\n    \"attendance\": {\n        \"id\": \"a35caaa9-4bbd-4673-af73-bf25d7aba4e8\",\n        \"user_id\": \"4e32c596-a22f-44c6-a7ae-205e9a39fed8\",\n        \"date\": \"2025-09-19T00:00:00.000Z\",\n        \"time_in\": \"14:26:34\",\n        \"time_out\": \"14:26:49\",\n        \"photo_in_url\": \"uploads\\\\1758266794792.jpg\",\n        \"photo_out_url\": \"uploads\\\\1758266809519.jpg\",\n        \"created_at\": \"2025-09-19T07:26:34.000Z\",\n        \"updated_at\": \"2025-09-19T07:26:49.520Z\"\n    }\n}"
+						},
+						{
+							"name": "400 - Already Checkout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "4e32c596-a22f-44c6-a7ae-205e9a39fed8",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/fahmi/OneDrive/Desktop/360_F_514723373_cIDcULXKOjW0yld18ENeWtFe5maDrQ4k.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/attendance/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"attendance",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "39"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"27-4kK69hEdMriVxuPqrxCY0Cte1rQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 07:27:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Already checked out today\"\n}"
+						},
+						{
+							"name": "400 - Missing user_id",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "johndoe-123",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/fahmi/OneDrive/Desktop/360_F_514723373_cIDcULXKOjW0yld18ENeWtFe5maDrQ4k.jpg",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/attendance/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"attendance",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "48"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"30-mIwx6uupRSQ1zvixCfUEiayffeQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 07:23:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"user_id is not allowed to be empty\"\n}"
+						},
+						{
+							"name": "400 - Missing file",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "johndoe-123",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/fahmi/OneDrive/Desktop/360_F_514723373_cIDcULXKOjW0yld18ENeWtFe5maDrQ4k.jpg",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/attendance/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"attendance",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "30"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1e-egDSTjeFJRKpfT2OXcI2pj+RxmM\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 07:23:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"File is required\"\n}"
+						},
+						{
+							"name": "400 - User Not Found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "johndoe-123",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/fahmi/OneDrive/Desktop/360_F_514723373_cIDcULXKOjW0yld18ENeWtFe5maDrQ4k.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/attendance/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"attendance",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "43"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2b-qz9wmgXR+aFkNb+x1y47WNtwpd8\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 07:25:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User with that id not exists!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "GET All Attendances",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/attendance/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"attendance",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/attendance/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"attendance",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1373"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"55d-zxy4Jvy207xCVeztIvOobvPrRR0\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 06:22:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success get all attendances\",\n    \"userAttendance\": [\n        {\n            \"id\": \"364980d9-438e-4859-bcee-4463aedefb31\",\n            \"user_id\": \"johndoe-123\",\n            \"date\": \"2025-09-18T00:00:00.000Z\",\n            \"time_in\": \"20:34:05\",\n            \"time_out\": \"20:34:17\",\n            \"photo_in_url\": \"uploads\\\\1758202445489.jpg\",\n            \"photo_out_url\": \"uploads\\\\1758202457666.jpeg\",\n            \"created_at\": \"2025-09-18T13:34:05.000Z\",\n            \"updated_at\": \"2025-09-18T13:34:17.000Z\",\n            \"user\": null\n        },\n        {\n            \"id\": \"6f7254ee-f4c6-41f9-8d2c-b7bda18ad5df\",\n            \"user_id\": \"c0e5bd49-7590-4a40-ac22-91cc5b5e8849\",\n            \"date\": \"2025-09-19T00:00:00.000Z\",\n            \"time_in\": \"02:32:45\",\n            \"time_out\": null,\n            \"photo_in_url\": \"uploads\\\\1758223965711.jpeg\",\n            \"photo_out_url\": null,\n            \"created_at\": \"2025-09-18T19:32:45.000Z\",\n            \"updated_at\": \"2025-09-18T19:32:45.000Z\",\n            \"user\": null\n        },\n        {\n            \"id\": \"8157eb34-330c-4849-b1a6-5407a70d733f\",\n            \"user_id\": \"johndoe-123\",\n            \"date\": \"2025-09-15T00:00:00.000Z\",\n            \"time_in\": \"08:25:15\",\n            \"time_out\": \"17:31:24\",\n            \"photo_in_url\": \"uploads/work-from-home-2.jpg\",\n            \"photo_out_url\": \"uploads/work-from-home.jpg\",\n            \"created_at\": \"2025-09-18T11:40:16.000Z\",\n            \"updated_at\": \"2025-09-18T11:40:16.000Z\",\n            \"user\": null\n        },\n        {\n            \"id\": \"fdb88963-bf11-44cb-b69d-735a7de5838b\",\n            \"user_id\": \"johndoe-123\",\n            \"date\": \"2025-09-14T00:00:00.000Z\",\n            \"time_in\": \"08:30:23\",\n            \"time_out\": \"16:51:24\",\n            \"photo_in_url\": \"uploads/work-from-home.jpg\",\n            \"photo_out_url\": \"uploads/work-from-home-2.jpg\",\n            \"created_at\": \"2025-09-18T11:40:16.000Z\",\n            \"updated_at\": \"2025-09-18T11:40:16.000Z\",\n            \"user\": null\n        }\n    ]\n}"
+						},
+						{
+							"name": "401 - Unauthorized",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/attendance/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"attendance",
+										""
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "55"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"37-hdzT7wsR/zuYDZvGVb6vGblzuyE\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 06:21:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"You have no access to view this resource!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "GET My Attendance",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/attendance/me",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"attendance",
+								"me"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2025-09-18",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/attendance/me",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"attendance",
+										"me"
+									],
+									"query": [
+										{
+											"key": "date",
+											"value": "18/08/2025",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1088"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"440-SGUaAKZNLQuxhAGFwBsH50WoWh4\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 06:28:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success get all attendances\",\n    \"userAttendance\": [\n        {\n            \"id\": \"364980d9-438e-4859-bcee-4463aedefb31\",\n            \"user_id\": \"4e32c596-a22f-44c6-a7ae-205e9a39fed8\",\n            \"date\": \"2025-09-18T00:00:00.000Z\",\n            \"time_in\": \"20:34:05\",\n            \"time_out\": \"20:34:17\",\n            \"photo_in_url\": \"uploads\\\\1758202445489.jpg\",\n            \"photo_out_url\": \"uploads\\\\1758202457666.jpeg\",\n            \"created_at\": \"2025-09-18T13:34:05.000Z\",\n            \"updated_at\": \"2025-09-18T13:34:17.000Z\"\n        },\n        {\n            \"id\": \"8157eb34-330c-4849-b1a6-5407a70d733f\",\n            \"user_id\": \"4e32c596-a22f-44c6-a7ae-205e9a39fed8\",\n            \"date\": \"2025-09-15T00:00:00.000Z\",\n            \"time_in\": \"08:25:15\",\n            \"time_out\": \"17:31:24\",\n            \"photo_in_url\": \"uploads/work-from-home-2.jpg\",\n            \"photo_out_url\": \"uploads/work-from-home.jpg\",\n            \"created_at\": \"2025-09-18T11:40:16.000Z\",\n            \"updated_at\": \"2025-09-18T11:40:16.000Z\"\n        },\n        {\n            \"id\": \"fdb88963-bf11-44cb-b69d-735a7de5838b\",\n            \"user_id\": \"4e32c596-a22f-44c6-a7ae-205e9a39fed8\",\n            \"date\": \"2025-09-14T00:00:00.000Z\",\n            \"time_in\": \"08:30:23\",\n            \"time_out\": \"16:51:24\",\n            \"photo_in_url\": \"uploads/work-from-home.jpg\",\n            \"photo_out_url\": \"uploads/work-from-home-2.jpg\",\n            \"created_at\": \"2025-09-18T11:40:16.000Z\",\n            \"updated_at\": \"2025-09-18T11:40:16.000Z\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "200 - Success Filter Date",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/attendance/me?date=2025-09-18",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"attendance",
+										"me"
+									],
+									"query": [
+										{
+											"key": "date",
+											"value": "2025-09-18"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "402"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"192-XONBJtXkgdLlnAM89QhmMGRKFMM\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 06:29:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success get all attendances\",\n    \"userAttendance\": [\n        {\n            \"id\": \"364980d9-438e-4859-bcee-4463aedefb31\",\n            \"user_id\": \"4e32c596-a22f-44c6-a7ae-205e9a39fed8\",\n            \"date\": \"2025-09-18T00:00:00.000Z\",\n            \"time_in\": \"20:34:05\",\n            \"time_out\": \"20:34:17\",\n            \"photo_in_url\": \"uploads\\\\1758202445489.jpg\",\n            \"photo_out_url\": \"uploads\\\\1758202457666.jpeg\",\n            \"created_at\": \"2025-09-18T13:34:05.000Z\",\n            \"updated_at\": \"2025-09-18T13:34:17.000Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "GET Attendance Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/attendance/364980d9-438e-4859-bcee-4463aedefb31",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"attendance",
+								"364980d9-438e-4859-bcee-4463aedefb31"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/attendance/364980d9-438e-4859-bcee-4463aedefb31",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"attendance",
+										"364980d9-438e-4859-bcee-4463aedefb31"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "404"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"194-T2/3RbMkq4ZmE1CZwE37t6cuaZA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 06:31:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success get attendance detail\",\n    \"attendanceDetail\": {\n        \"id\": \"364980d9-438e-4859-bcee-4463aedefb31\",\n        \"user_id\": \"4e32c596-a22f-44c6-a7ae-205e9a39fed8\",\n        \"date\": \"2025-09-18T00:00:00.000Z\",\n        \"time_in\": \"20:34:05\",\n        \"time_out\": \"20:34:17\",\n        \"photo_in_url\": \"uploads\\\\1758202445489.jpg\",\n        \"photo_out_url\": \"uploads\\\\1758202457666.jpeg\",\n        \"created_at\": \"2025-09-18T13:34:05.000Z\",\n        \"updated_at\": \"2025-09-18T13:34:17.000Z\"\n    }\n}"
+						},
+						{
+							"name": "404 - Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/attendance/unknown",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"attendance",
+										"unknown"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "35"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"23-3HZddMUuVC2OnhGGELpE7B/1oQI\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 06:37:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Attendance Not Found!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "PATCH Update Attendance",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "date",
+									"value": "2025-09-20",
+									"type": "text"
+								},
+								{
+									"key": "time_in",
+									"value": "09:00:00",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "time_out",
+									"value": "08:00:00",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/attendance/364980d9-438e-4859-bcee-4463aedefb31",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"attendance",
+								"364980d9-438e-4859-bcee-4463aedefb31"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "404 - Attendance Not Found",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "time_in",
+											"value": "00:05:05",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "time_out",
+											"value": "00:10:10",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "date",
+											"value": "2025-09-18",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": [],
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/attendance/unknown",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"attendance",
+										"unknown"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"22-H4gP0wlkm7/mNMSzH2px0ZDa43k\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 06:40:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Attendance not found\"\n}"
+						},
+						{
+							"name": "400 - Time Check In > Time Check Out",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "date",
+											"value": "2025-09-20",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "time_in",
+											"value": "21:00:00",
+											"type": "text"
+										},
+										{
+											"key": "time_out",
+											"value": "00:10:10",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": [],
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/attendance/364980d9-438e-4859-bcee-4463aedefb31",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"attendance",
+										"364980d9-438e-4859-bcee-4463aedefb31"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "55"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"37-nmjbP7/nOMZ6DE3FWMbxyB6Uz3E\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 06:42:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"New time_in cannot be older than time_out\"\n}"
+						},
+						{
+							"name": "400 - Time Check Out < Time Check In",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "date",
+											"value": "2025-09-20",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "time_in",
+											"value": "09:00:00",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "time_out",
+											"value": "08:00:00",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": [],
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/attendance/364980d9-438e-4859-bcee-4463aedefb31",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"attendance",
+										"364980d9-438e-4859-bcee-4463aedefb31"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "57"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"39-FmVgWkybkQyclY5mVnrijdOQf+I\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 06:42:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"New time_out cannot be earlier than time_in\"\n}"
+						},
+						{
+							"name": "200 - Success",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "date",
+											"value": "2025-09-20",
+											"type": "text"
+										},
+										{
+											"key": "time_in",
+											"value": "09:00:00",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "time_out",
+											"value": "08:00:00",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": [],
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/attendance/364980d9-438e-4859-bcee-4463aedefb31",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"attendance",
+										"364980d9-438e-4859-bcee-4463aedefb31"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "400"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"190-TUQWOVO1PXQdboLAZbEn817SnXw\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 06:43:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Attendance updated successfully\",\n    \"attendance\": {\n        \"id\": \"364980d9-438e-4859-bcee-4463aedefb31\",\n        \"user_id\": \"4e32c596-a22f-44c6-a7ae-205e9a39fed8\",\n        \"date\": \"2025-09-20T00:00:00.000Z\",\n        \"time_in\": \"09:00:00\",\n        \"time_out\": \"20:34:17\",\n        \"photo_in_url\": \"uploads\\\\1758202445489.jpg\",\n        \"photo_out_url\": \"uploads\\\\1758202457666.jpeg\",\n        \"created_at\": \"2025-09-18T13:34:05.000Z\",\n        \"updated_at\": \"2025-09-19T06:42:33.000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE One Attendance",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/attendance/6f7254ee-f4c6-41f9-8d2c-b7bda18ad5df",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"attendance",
+								"6f7254ee-f4c6-41f9-8d2c-b7bda18ad5df"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/attendance/6f7254ee-f4c6-41f9-8d2c-b7bda18ad5df",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"attendance",
+										"6f7254ee-f4c6-41f9-8d2c-b7bda18ad5df"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "45"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2d-cM7wgmU8lNe4UrYSohIiUUCOG7M\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 06:44:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Attendance deleted successfully\"\n}"
+						},
+						{
+							"name": "404 - Not Found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/attendance/unknown",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"attendance",
+										"unknown"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"22-H4gP0wlkm7/mNMSzH2px0ZDa43k\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 06:44:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Attendance not found\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "GET All Users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/user/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"user",
+								""
+							],
+							"query": [
+								{
+									"key": "role",
+									"value": "employee",
+									"disabled": true
+								},
+								{
+									"key": "department",
+									"value": "Engineering",
+									"disabled": true
+								},
+								{
+									"key": "position",
+									"value": "consultant",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/user/",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"user",
+										""
+									],
+									"query": [
+										{
+											"key": "role",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "department",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "role",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1469"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5bd-QHJ/7kRDhgnA9yUOTVx2Y5dVGdc\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 05:58:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success get all users\",\n    \"allUsers\": [\n        {\n            \"id\": \"4e32c596-a22f-44c6-a7ae-205e9a39fed8\",\n            \"username\": \"johndoe\",\n            \"password\": \"$2b$10$iveb/eZAvfpMb70gQ.3fFuT39dvwh2qmYmA334CuOBqHL83mk.whq\",\n            \"role\": \"employee\",\n            \"full_name\": \"John Doe\",\n            \"email\": \"johndoe@example.com\",\n            \"phone\": \"081231231234\",\n            \"department\": \"Engineering\",\n            \"position\": \"Software Engineer\",\n            \"created_at\": \"2025-09-19T05:53:21.000Z\",\n            \"updated_at\": \"2025-09-19T05:53:21.000Z\"\n        },\n        {\n            \"id\": \"c0e5bd49-7590-4a40-ac22-91cc5b5e8849\",\n            \"username\": \"fahmi\",\n            \"password\": \"$2b$10$vdNS3QbiKjRFjfEl8MC.DeufxoPQPLkfVDEallIqF3uNe48axOnqW\",\n            \"role\": \"employee\",\n            \"full_name\": \"fahmi\",\n            \"email\": \"fahmi@test.com\",\n            \"phone\": \"08123123123\",\n            \"department\": \"it\",\n            \"position\": \"consultant\",\n            \"created_at\": \"2025-09-18T17:25:29.000Z\",\n            \"updated_at\": \"2025-09-18T17:25:29.000Z\"\n        },\n        {\n            \"id\": \"dc23760f-2290-47ec-a44e-b2a73ad8662e\",\n            \"username\": \"hr\",\n            \"password\": \"$2b$10$m6COogX0.q49EZqu5TDMt.p7LaHcK5/CJgOFMaBt22IuAAFZfUizm\",\n            \"role\": \"hr\",\n            \"full_name\": \"Human Resource\",\n            \"email\": \"hr@test.com\",\n            \"phone\": \"08123123123\",\n            \"department\": \"hr\",\n            \"position\": \"supervisor\",\n            \"created_at\": \"2025-09-18T13:38:11.000Z\",\n            \"updated_at\": \"2025-09-18T17:24:24.000Z\"\n        },\n        {\n            \"id\": \"fdacf06b-68b1-4004-a9f9-c393fdef5dfd\",\n            \"username\": \"admin\",\n            \"password\": \"$2b$10$19FbHLjyXl9z6G6.nudIY.2I2dautRoJPsTCa4biMbK0HHiYpFbri\",\n            \"role\": \"admin\",\n            \"full_name\": \"System Administrator\",\n            \"email\": \"admin@example.com\",\n            \"phone\": \"08123456789\",\n            \"department\": \"it\",\n            \"position\": \"director\",\n            \"created_at\": \"2025-09-18T11:40:16.000Z\",\n            \"updated_at\": \"2025-09-18T17:11:18.000Z\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "200 - Success Filter By Params",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/user/?role=employee",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"user",
+										""
+									],
+									"query": [
+										{
+											"key": "role",
+											"value": "employee"
+										},
+										{
+											"key": "department",
+											"value": null,
+											"disabled": true
+										},
+										{
+											"key": "role",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "767"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2ff-ur4hoTLmqbU05mzDbaHcMmH4yG8\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 05:58:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success get all users\",\n    \"allUsers\": [\n        {\n            \"id\": \"4e32c596-a22f-44c6-a7ae-205e9a39fed8\",\n            \"username\": \"johndoe\",\n            \"password\": \"$2b$10$iveb/eZAvfpMb70gQ.3fFuT39dvwh2qmYmA334CuOBqHL83mk.whq\",\n            \"role\": \"employee\",\n            \"full_name\": \"John Doe\",\n            \"email\": \"johndoe@example.com\",\n            \"phone\": \"081231231234\",\n            \"department\": \"Engineering\",\n            \"position\": \"Software Engineer\",\n            \"created_at\": \"2025-09-19T05:53:21.000Z\",\n            \"updated_at\": \"2025-09-19T05:53:21.000Z\"\n        },\n        {\n            \"id\": \"c0e5bd49-7590-4a40-ac22-91cc5b5e8849\",\n            \"username\": \"fahmi\",\n            \"password\": \"$2b$10$vdNS3QbiKjRFjfEl8MC.DeufxoPQPLkfVDEallIqF3uNe48axOnqW\",\n            \"role\": \"employee\",\n            \"full_name\": \"fahmi\",\n            \"email\": \"fahmi@test.com\",\n            \"phone\": \"08123123123\",\n            \"department\": \"it\",\n            \"position\": \"consultant\",\n            \"created_at\": \"2025-09-18T17:25:29.000Z\",\n            \"updated_at\": \"2025-09-18T17:25:29.000Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "GET User Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/user/4e32c596-a22f-44c6-a7ae-205e9a39fed8",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"user",
+								"4e32c596-a22f-44c6-a7ae-205e9a39fed8"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/user/4e32c596-a22f-44c6-a7ae-205e9a39fed8",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"user",
+										"4e32c596-a22f-44c6-a7ae-205e9a39fed8"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "420"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1a4-G0KUcTZDIU5SxKRWv0mFm24vCKQ\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 06:01:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success get a user\",\n    \"selectedUser\": {\n        \"id\": \"4e32c596-a22f-44c6-a7ae-205e9a39fed8\",\n        \"username\": \"johndoe\",\n        \"password\": \"$2b$10$iveb/eZAvfpMb70gQ.3fFuT39dvwh2qmYmA334CuOBqHL83mk.whq\",\n        \"role\": \"employee\",\n        \"full_name\": \"John Doe\",\n        \"email\": \"johndoe@example.com\",\n        \"phone\": \"081231231234\",\n        \"department\": \"Engineering\",\n        \"position\": \"Software Engineer\",\n        \"created_at\": \"2025-09-19T05:53:21.000Z\",\n        \"updated_at\": \"2025-09-19T05:53:21.000Z\"\n    }\n}"
+						},
+						{
+							"name": "404 - User Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/user/unknwon",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"user",
+										"unknwon"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "29"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1d-QBO3n2KR+AbWHh2cmvMh+7ruNHY\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 06:01:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User not found!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "PATCH Update User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"full_name\": \"John Doe Test\"\r\n    // \"phone\": \"000000000000\"\r\n    // \"department\": \"it\"\r\n    // \"position\": \"director\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/user/4e32c596-a22f-44c6-a7ae-205e9a39fed8",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"user",
+								"4e32c596-a22f-44c6-a7ae-205e9a39fed8"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "404 - User Not Found",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    // \"full_name\": \"John Doe Test\",\r\n    // \"phone\": \"081231231234\",\r\n    // \"department\": \"Security\",\r\n    // \"position\": \"Manager\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/user/unknown",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"user",
+										"unknown"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "29"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1d-QBO3n2KR+AbWHh2cmvMh+7ruNHY\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 06:03:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User not found!\"\n}"
+						},
+						{
+							"name": "200 - Success",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    // \"full_name\": \"John Doe Test\"\r\n    // \"phone\": \"000000000000\"\r\n    // \"department\": \"it\"\r\n    // \"position\": \"director\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/user/4e32c596-a22f-44c6-a7ae-205e9a39fed8",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"user",
+										"4e32c596-a22f-44c6-a7ae-205e9a39fed8"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "406"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"196-jg4VvYY/F+QvcQ3IFv+E+xo7GlY\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 06:08:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User updated successfully\",\n    \"user\": {\n        \"id\": \"4e32c596-a22f-44c6-a7ae-205e9a39fed8\",\n        \"username\": \"johndoe\",\n        \"password\": \"$2b$10$iveb/eZAvfpMb70gQ.3fFuT39dvwh2qmYmA334CuOBqHL83mk.whq\",\n        \"role\": \"employee\",\n        \"full_name\": \"John Doe Test\",\n        \"email\": \"johndoe@example.com\",\n        \"phone\": \"000000000000\",\n        \"department\": \"it\",\n        \"position\": \"director\",\n        \"created_at\": \"2025-09-19T05:53:21.000Z\",\n        \"updated_at\": \"2025-09-19T06:08:14.660Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/user/c0e5bd49-7590-4a40-ac22-91cc5b5e8849",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"user",
+								"c0e5bd49-7590-4a40-ac22-91cc5b5e8849"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200 - Success Delete User",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    // \"full_name\": \"John Doe Test\",\r\n    // \"phone\": \"081231231234\",\r\n    // \"department\": \"Security\",\r\n    \"position\": \"Manager\"\r\n}"
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/user/johndoe-123",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"user",
+										"johndoe-123"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "39"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"27-27o4zzUjhHNmthTJyia4gBCjpos\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Sep 2025 19:20:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User deleted successfully\"\n}"
+						},
+						{
+							"name": "404 - Error User Not Found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/user/unknown",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"user",
+										"unknown"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "28"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c-ZEVVcvtFhxKX/QUvVKqKxwGbbNA\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Sep 2025 19:19:53 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User not found\"\n}"
+						},
+						{
+							"name": "404 - Not Found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/user/unknwon",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"user",
+										"unknwon"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "28"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c-ZEVVcvtFhxKX/QUvVKqKxwGbbNA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 06:10:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User not found\"\n}"
+						},
+						{
+							"name": "200 - Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/user/c0e5bd49-7590-4a40-ac22-91cc5b5e8849",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"user",
+										"c0e5bd49-7590-4a40-ac22-91cc5b5e8849"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "39"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"27-27o4zzUjhHNmthTJyia4gBCjpos\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 19 Sep 2025 06:11:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User deleted successfully\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjRlMzJjNTk2LWEyMmYtNDRjNi1hN2FlLTIwNWU5YTM5ZmVkOCIsInVzZXJuYW1lIjoiam9obmRvZSIsImZ1bGxfbmFtZSI6IkpvaG4gRG9lIFRlc3QiLCJyb2xlIjoiZW1wbG95ZWUiLCJpYXQiOjE3NTgyNjU5ODIsImV4cCI6MTc1ODY5Nzk4Mn0.d_x-w4TIQ4bgIymgcCrZfqH-g_usUdmXFIUm-Ta_4YI",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:5000"
+		}
+	]
+}
