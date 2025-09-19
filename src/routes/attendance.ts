@@ -12,6 +12,11 @@ const {
   saveUploadedFile,
   deleteUploadedFile,
 } = require("../../utils/fileUpload");
+const {
+  attendanceDetailSchema,
+  myAttendanceSchema,
+  updateAttendanceSchema,
+} = require("../utils/attendanceValidator");
 
 const router = express.Router();
 
@@ -29,7 +34,17 @@ router.post(
   upload.single("photo"),
   async (req: Request, res: Response) => {
     try {
-      const { user_id } = req.body;
+      const user_id = req?.body?.user_id;
+      if (!user_id) {
+        return res
+          .status(400)
+          .json({ message: "user_id is not allowed to be empty" });
+      }
+
+      const file = req?.file;
+      if (!file) {
+        return res.status(400).json({ message: "File is required" });
+      }
 
       const isUserExist = await db.User.findOne({
         where: {
@@ -96,8 +111,26 @@ router.get(
   authorize([UserRole.ADMIN, UserRole.HR]),
   async (req: any, res: Response) => {
     try {
-      const attendances = await db.Attendance.findAll();
-      return res.json({ message: "Success get all attendances", attendances });
+      const attendances = await db.Attendance.findAll({
+        include: [
+          {
+            model: db.User,
+            as: "user",
+            attributes: [
+              "username",
+              "role",
+              "full_name",
+              "department",
+              "position",
+            ],
+          },
+        ],
+      });
+
+      return res.json({
+        message: "Success get all attendances",
+        userAttendance: attendances,
+      });
     } catch (error) {
       return res.status(500).json({ message: "Server error" });
     }
@@ -109,7 +142,14 @@ router.get(
   authorize([UserRole.ADMIN, UserRole.HR], true),
   async (req: any, res: Response) => {
     try {
-      const { user_id } = req.body;
+      const { error, value } = myAttendanceSchema.validate(req.query);
+
+      if (error) {
+        return res.status(400).json({ message: error.details[0].message });
+      }
+
+      const { date } = value;
+      const { id: user_id } = req?.userData;
 
       const selectedUser = await db.User.findOne({
         where: {
@@ -122,10 +162,20 @@ router.get(
           .json({ message: "User with that id not exists!" });
       }
 
-      const userAttendace = await db.Attendance.findAll({ where: { user_id } });
+      const userAttendance = await db.Attendance.findAll({
+        where: {
+          user_id,
+          ...(date && {
+            date: {
+              [Sequelize.Op.gte]: dayjs(date).startOf("day").toDate(),
+              [Sequelize.Op.lte]: dayjs(date).endOf("day").toDate(),
+            },
+          }),
+        },
+      });
       return res.json({
         message: "Success get all attendances",
-        userAttendace,
+        userAttendance,
       });
     } catch (error) {
       return res.status(500).json({ message: "Server error" });
@@ -138,9 +188,19 @@ router.get(
   authorize([UserRole.ADMIN, UserRole.HR], true),
   async (req: any, res: Response) => {
     try {
-      const { id } = req.params;
+      const { error, value } = attendanceDetailSchema.validate(req.params);
 
-      const attendanceDetail = await db.Attendance.findOne({ where: id });
+      if (error) {
+        return res.status(400).json({ message: error.details[0].message });
+      }
+
+      const { id } = value;
+
+      const attendanceDetail = await db.Attendance.findOne({ where: { id } });
+      if (!attendanceDetail) {
+        return res.status(404).json({ message: "Attendance Not Found!" });
+      }
+
       return res.json({
         message: "Success get attendance detail",
         attendanceDetail,
@@ -157,8 +217,17 @@ router.patch(
   authorize([UserRole.ADMIN, UserRole.HR]),
   async (req: any, res: Response) => {
     try {
-      const { id } = req.params;
-      const { time_in, time_out, date } = req.body;
+      const { error, value } = updateAttendanceSchema.validate({
+        ...req.params,
+        ...req.body,
+      });
+
+      if (error) {
+        return res.status(400).json({ message: error.details[0].message });
+      }
+
+      const { id, date, time_in, time_out } = value;
+
       let errorMessage = "";
 
       const attendance = await db.Attendance.findOne({ where: { id } });
@@ -186,11 +255,12 @@ router.patch(
         }
       }
 
-      if (req.file) {
-        deleteUploadedFile(attendance.dataValues.photo_url);
-        const photoPath = saveUploadedFile(req.file);
-        attendance.set("photo_url", photoPath);
-      }
+      // TODO: FIX UPDATE PHOTO CHECK IN AND CHECK OUT
+      // if (req.file) {
+      //   deleteUploadedFile(attendance.dataValues.photo_url);
+      //   const photoPath = saveUploadedFile(req.file);
+      //   attendance.set("photo_url", photoPath);
+      // }
 
       await attendance.save();
 
@@ -213,7 +283,13 @@ router.delete(
   authorize([UserRole.ADMIN, UserRole.HR]),
   async (req: any, res: Response) => {
     try {
-      const { id } = req.params;
+      const { error, value } = attendanceDetailSchema.validate(req.params);
+
+      if (error) {
+        return res.status(400).json({ message: error.details[0].message });
+      }
+
+      const { id } = value;
 
       const t = await db.sequelize.transaction();
 

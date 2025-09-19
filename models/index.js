@@ -44,6 +44,9 @@ Object.keys(db).forEach((modelName) => {
   }
 });
 
+db.Attendance.belongsTo(db.User, { foreignKey: "user_id", as: "user" });
+db.User.hasMany(db.Attendance, { foreignKey: "user_id", as: "attendances" });
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

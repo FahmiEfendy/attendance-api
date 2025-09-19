@@ -43,7 +43,7 @@ const authorize =
     }
 
     // Allow self-access
-    if (isAllowSelf && userId === targetId) {
+    if (isAllowSelf) {
       return next();
     }
 

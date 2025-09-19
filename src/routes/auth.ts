@@ -4,6 +4,7 @@ import jwt = require("jsonwebtoken");
 import Sequelize = require("sequelize");
 
 const db = require("../../models");
+const { loginSchema, registerSchema } = require("../utils/authValidator");
 
 const router = express.Router();
 
@@ -12,6 +13,12 @@ type Response = express.Response;
 
 router.post("/register", async (req: Request, res: Response) => {
   try {
+    const { error, value } = registerSchema.validate(req.body);
+
+    if (error) {
+      return res.status(400).json({ message: error.details[0].message });
+    }
+
     const {
       username,
       password,
@@ -21,12 +28,10 @@ router.post("/register", async (req: Request, res: Response) => {
       phone,
       department,
       position,
-    } = req.body;
+    } = value;
 
     const isUserExist = await db.User.findOne({
-      where: {
-        [Sequelize.Op.or]: [{ username }, { email }],
-      },
+      where: { username },
     });
 
     if (isUserExist) {
@@ -56,13 +61,13 @@ router.post("/register", async (req: Request, res: Response) => {
 
 router.post("/login", async (req: Request, res: Response) => {
   try {
-    const { username, password } = req.body;
+    const { error, value } = loginSchema.validate(req.body);
 
-    if (!username || !password) {
-      return res
-        .status(400)
-        .json({ message: "Username and password are required" });
+    if (error) {
+      return res.status(400).json({ message: error.details[0].message });
     }
+
+    const { username, password } = value;
 
     const findUser = await db.User.findOne({ where: { username } });
     const selectedUser = findUser?.dataValues;
