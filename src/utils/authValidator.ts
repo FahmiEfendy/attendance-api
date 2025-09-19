@@ -1,9 +1,9 @@
 const Joi = require("joi");
 
 const registerSchema = Joi.object({
-  username: Joi.string().alphanum().min(3).max(30).required(),
+  username: Joi.string().min(3).max(30).required(),
   password: Joi.string().min(6).required(),
-  role: Joi.string().valid("employee", "hr", "admin").required(),
+  role: Joi.string().valid("employee", "hr").required(),
   full_name: Joi.string().min(3).required(),
   email: Joi.string().email().required(),
   phone: Joi.string().required(),
@@ -12,7 +12,7 @@ const registerSchema = Joi.object({
 });
 
 const loginSchema = Joi.object({
-  username: Joi.string().alphanum().min(3).max(30).required(),
+  username: Joi.string().min(3).max(30).required(),
   password: Joi.string().min(6).required(),
 });
 

@@ -8,7 +8,7 @@ interface UserAttributes {
   id: string;
   username: string;
   password: string;
-  role: "employee" | "hr" | "admin";
+  role: "employee" | "hr";
   full_name: string;
   email: string;
   phone?: string;
@@ -28,7 +28,7 @@ module.exports = (sequelize: types.Sequelize, dataTypes: typeof DataTypes) => {
     public id!: string;
     public username!: string;
     public password!: string;
-    public role!: "employee" | "hr" | "admin";
+    public role!: "employee" | "hr";
     public full_name!: string;
     public email!: string;
     public phone!: string;
@@ -49,7 +49,7 @@ module.exports = (sequelize: types.Sequelize, dataTypes: typeof DataTypes) => {
       username: { type: DataTypes.STRING(50), allowNull: false, unique: true },
       password: { type: DataTypes.STRING(255), allowNull: false },
       role: {
-        type: DataTypes.ENUM("employee", "hr", "admin"),
+        type: DataTypes.ENUM("employee", "hr"),
         defaultValue: "employee",
       },
       full_name: { type: DataTypes.STRING(100), allowNull: false },

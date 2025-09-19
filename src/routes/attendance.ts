@@ -106,40 +106,37 @@ router.post(
   }
 );
 
-router.get(
-  "/",
-  authorize([UserRole.ADMIN, UserRole.HR]),
-  async (req: any, res: Response) => {
-    try {
-      const attendances = await db.Attendance.findAll({
-        include: [
-          {
-            model: db.User,
-            as: "user",
-            attributes: [
-              "username",
-              "role",
-              "full_name",
-              "department",
-              "position",
-            ],
-          },
-        ],
-      });
+router.get("/", authorize([UserRole.HR]), async (req: any, res: Response) => {
+  try {
+    const attendances = await db.Attendance.findAll({
+      include: [
+        {
+          model: db.User,
+          as: "user",
+          attributes: [
+            "username",
+            "role",
+            "full_name",
+            "department",
+            "position",
+          ],
+        },
+      ],
+      order: [["date", "DESC"]],
+    });
 
-      return res.json({
-        message: "Success get all attendances",
-        userAttendance: attendances,
-      });
-    } catch (error) {
-      return res.status(500).json({ message: "Server error" });
-    }
+    return res.json({
+      message: "Success get all attendances",
+      userAttendance: attendances,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: "Server error" });
   }
-);
+});
 
 router.get(
   "/me",
-  authorize([UserRole.ADMIN, UserRole.HR], true),
+  authorize([UserRole.HR], true),
   async (req: any, res: Response) => {
     try {
       const { error, value } = myAttendanceSchema.validate(req.query);
@@ -172,6 +169,7 @@ router.get(
             },
           }),
         },
+        order: [["date", "DESC"]],
       });
       return res.json({
         message: "Success get all attendances",
@@ -185,7 +183,7 @@ router.get(
 
 router.get(
   "/:id",
-  authorize([UserRole.ADMIN, UserRole.HR], true),
+  authorize([UserRole.HR], true),
   async (req: any, res: Response) => {
     try {
       const { error, value } = attendanceDetailSchema.validate(req.params);
@@ -214,7 +212,7 @@ router.get(
 router.patch(
   "/:id",
   upload.single("photo"),
-  authorize([UserRole.ADMIN, UserRole.HR]),
+  authorize([UserRole.HR]),
   async (req: any, res: Response) => {
     try {
       const { error, value } = updateAttendanceSchema.validate({
@@ -280,7 +278,7 @@ router.patch(
 
 router.delete(
   "/:id",
-  authorize([UserRole.ADMIN, UserRole.HR]),
+  authorize([UserRole.HR]),
   async (req: any, res: Response) => {
     try {
       const { error, value } = attendanceDetailSchema.validate(req.params);

@@ -12,40 +12,36 @@ type Request = express.Request;
 type Response = express.Response;
 
 // TODO: fix any
-router.get(
-  "/",
-  authorize([UserRole.ADMIN, UserRole.HR]),
-  async (req: any, res: Response) => {
-    try {
-      const { error, value } = allUserSchema.validate(req.query);
+router.get("/", authorize([UserRole.HR]), async (req: any, res: Response) => {
+  try {
+    const { error, value } = allUserSchema.validate(req.query);
 
-      if (error) {
-        return res.status(400).json({ message: error.details[0].message });
-      }
-
-      const { role, department, position } = value;
-
-      const filter: { role?: string; department?: string; position?: string } =
-        {};
-      if (role) filter.role = role;
-      if (department) filter.department = department;
-      if (position) filter.position = position;
-
-      const allUsers = await db.User.findAll({ where: filter });
-
-      return res.status(200).json({
-        message: "Success get all users",
-        allUsers,
-      });
-    } catch (error) {
-      return res.status(500).json({ message: "Server error" });
+    if (error) {
+      return res.status(400).json({ message: error.details[0].message });
     }
+
+    const { role, department, position } = value;
+
+    const filter: { role?: string; department?: string; position?: string } =
+      {};
+    if (role) filter.role = role;
+    if (department) filter.department = department;
+    if (position) filter.position = position;
+
+    const allUsers = await db.User.findAll({ where: filter });
+
+    return res.status(200).json({
+      message: "Success get all users",
+      allUsers,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: "Server error" });
   }
-);
+});
 
 router.get(
   "/:id",
-  authorize([UserRole.ADMIN, UserRole.HR], true),
+  authorize([UserRole.HR], true),
   async (req: any, res: Response) => {
     try {
       const { error, value } = userDetailSchema.validate(req.params);
@@ -73,7 +69,7 @@ router.get(
 
 router.patch(
   "/:id",
-  authorize([UserRole.ADMIN, UserRole.HR]),
+  authorize([UserRole.HR]),
   async (req: any, res: Response) => {
     try {
       const { error, value } = userDetailSchema.validate(
@@ -119,7 +115,7 @@ router.patch(
 
 router.delete(
   "/:id",
-  authorize([UserRole.ADMIN, UserRole.HR]),
+  authorize([UserRole.HR]),
   async (req: any, res: Response) => {
     try {
       const { error, value } = userDetailSchema.validate(req.params);
